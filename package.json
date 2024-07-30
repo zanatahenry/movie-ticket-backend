@@ -1,0 +1,30 @@
+{
+  "name": "movie-challenge",
+  "version": "1.0.0",
+  "description": "A movie system challenge",
+  "main": "build/main.js",
+  "repository": "https://github.com/zanatahenry/movie-challenge",
+  "author": "Henry Zanata",
+  "license": "MIT",
+  "scripts": {
+    "commit": "git-cz",
+    "dev": "tsnd --respawn --transpile-only source/main.ts"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "express": "^4.19.2",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.0.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "ts-node-dev": "^2.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
