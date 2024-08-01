@@ -1,10 +1,9 @@
 import { AxiosError, AxiosRequestConfig } from "axios";
 import TheMovieDB from "../globals/TheMovieDB";
-
-type Genre = "movie" | "tv"
+import { GenreType } from "../models/Genre/GenreModel";
 
 class TheMovieDbAPI extends TheMovieDB {
-  async listGenres (genreType: Genre, config?: AxiosRequestConfig) {
+  async listGenres (genreType: GenreType, config?: AxiosRequestConfig) {
     try {
       const response = await this.API.get(`/genre/${genreType}/list`, config)
       return response.data
@@ -13,7 +12,7 @@ class TheMovieDbAPI extends TheMovieDB {
     }
   }
 
-  async findMovieByName (genreType: Genre, config?: AxiosRequestConfig) {
+  async findMovieByName (genreType: GenreType, config?: AxiosRequestConfig) {
     try {
       const response = await this.API.get(`/search/${genreType}`, config)
     } catch (error) {
@@ -21,7 +20,7 @@ class TheMovieDbAPI extends TheMovieDB {
     }
   }
 
-  async findAllMovies (genreType: Genre, config: AxiosRequestConfig) {
+  async findAllMovies (genreType: GenreType, config: AxiosRequestConfig) {
     try {
       const response = await this.API.get(`/discover/${genreType}`, config)
     } catch (error) {
@@ -29,3 +28,5 @@ class TheMovieDbAPI extends TheMovieDB {
     }
   }
 }
+
+export default new TheMovieDbAPI()

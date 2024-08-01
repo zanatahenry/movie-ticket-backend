@@ -29,11 +29,12 @@ export interface Paginate {
 
 export type SimpleSelectType<T> = { [key in keyof T]-?: number | boolean | string }
 
-export abstract class Repository<Document, Model, MongoDB> {
-  readonly featureName: string
-
+export abstract class Repository<IModelInterface, IModel> {
   constructor (
-    protected mongoDB: MongoDB,
+    protected mongoDB: Model<Document & Omit<IModelInterface, '_id'>> & {
+      aggregatePaginate?: any
+    },
+
     protected session?: ClientSession
   ) {
     this.mongoDB = mongoDB
@@ -47,13 +48,13 @@ export abstract class Repository<Document, Model, MongoDB> {
    * @param options
    * @returns Model
    */
-  abstract findById (id: Types.ObjectId): Promise<Model|{}|null>
+  abstract findById (id: Types.ObjectId): Promise<IModel|{}|null>
 
   /**
    *
    * @param doc
    * @returns Promise<Model> or Object
    */
-  abstract create (model: Model, options?: mongoose.QueryOptions<any>): Promise<Model|{}>
+  abstract create (model: IModel, options?: mongoose.QueryOptions<any>): Promise<IModel|{}>
 
 }

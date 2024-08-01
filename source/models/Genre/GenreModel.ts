@@ -1,24 +1,30 @@
-import mongoose from "mongoose";
 import Model from "../../factory/Model";
 
+export enum GenreType {
+  movie = 'movie',
+  tv = 'tv'
+}
+
+export const GenreTypeValues = Object.values(GenreType)
+
 export interface IGenre {
-  _id?: mongoose.Types.ObjectId | unknown
   name: string
   code: number
+  type: GenreType
   createdAt?: Date
   updatedAt?: Date
 }
 
 export default class GenreModel extends Model<IGenre> {
-  public _id?: IGenre['_id']
   public name: IGenre['name']
   public code: IGenre['code']
+  public type: IGenre['type']
 
   constructor (genre: IGenre) {
     super(genre)
 
-    this._id = genre._id
     this.name = genre.name
     this.code = genre.code
+    this.type = genre.type
   }
 }

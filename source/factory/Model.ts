@@ -1,7 +1,7 @@
 import { Types } from 'mongoose'
 
 export default abstract class Model<T> {
-  public _id?: Types.ObjectId | unknown
+  public _id?: Types.ObjectId
 
   protected createdAt?: Date
   protected updatedAt?: Date
