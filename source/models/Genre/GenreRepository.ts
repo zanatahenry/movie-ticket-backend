@@ -8,8 +8,10 @@ interface IFind {
 }
 
 export class GenreRepository extends Repository<IGenre, GenreModel> {
-  async create (model: GenreModel, options?: QueryOptions<any>): Promise<GenreModel | {}> {
+  async create (model: GenreModel, options?: QueryOptions<any>): Promise<GenreModel | null> {
     const created = await this.mongoDB.create([model], options)
+    if (!created) return null
+
     return new GenreModel(created[0])
   }
 
@@ -22,9 +24,8 @@ export class GenreRepository extends Repository<IGenre, GenreModel> {
     return models
   }
 
-  async findById (id: Types.ObjectId): Promise<GenreModel | {} | null> {
+  async findById (id: Types.ObjectId): Promise<GenreModel | null> {
     const document = await this.mongoDB.findById(id)
-
     if (!document) return null
 
     return new GenreModel(document)

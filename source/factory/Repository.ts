@@ -48,13 +48,13 @@ export abstract class Repository<IModelInterface, IModel> {
    * @param options
    * @returns Model
    */
-  abstract findById (id: Types.ObjectId): Promise<IModel|{}|null>
+  abstract findById (id: Types.ObjectId): Promise<IModel | null>
 
   /**
    *
    * @param doc
    * @returns Promise<Model> or Object
    */
-  abstract create (model: IModel, options?: mongoose.QueryOptions<any>): Promise<IModel|{}>
+  abstract create (model: IModel, options?: mongoose.QueryOptions<any>): Promise<IModel | null >
 
 }
