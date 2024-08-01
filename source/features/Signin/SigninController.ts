@@ -17,14 +17,13 @@ class SigninController extends Controller {
         const correctPassword = await bcrypt.compare(body.password, user.password)
         if (!correctPassword) return response.send_badRequest('Senha inválida!')
 
-
         const token = jwt.sign(user, String(process.env.AUTH_PRIVATE_KEY), {
           expiresIn: String(process.env.AUTH_EXPIRES_IN)
         })
 
         return response.send_ok("Autenticação realizada com sucesso!", { token, user })
       } catch (error) {
-        console.log(error)
+        next(error)
       }
     })
 

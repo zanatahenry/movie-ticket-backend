@@ -1,6 +1,6 @@
 import cors from 'cors'
 
-import { NextFunction, Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 import SigninController from '../features/Signin/SigninController';
 import SignupController from '../features/Signup/SignupController';
 
@@ -11,7 +11,7 @@ unauthRouter.use(cors())
 unauthRouter.use('/signin', SigninController)
 unauthRouter.use('/signup', SignupController)
 
-unauthRouter.get('/status', (request: Request, response: Response, next: NextFunction) => {
+unauthRouter.get('/status', (request: Request, response: Response) => {
   return response.status(200).send('available')
 })
 

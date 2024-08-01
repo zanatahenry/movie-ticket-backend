@@ -2,7 +2,7 @@ import http from 'http'
 import responser from 'responser'
 import Responserror from 'responserror'
 
-import express, { Request, Response } from "express"
+import express from "express"
 import Server from "./Server";
 import applicationRouter from '../routes/applicationRouter';
 
