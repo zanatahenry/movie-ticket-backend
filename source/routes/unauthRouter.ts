@@ -1,16 +1,18 @@
 import cors from 'cors'
 
-import { NextFunction, Request, Response, Router } from "express";
+import { Request, Response, Router } from "express";
 import SigninController from '../features/Signin/SigninController';
-import RegisterController from '../features/Register/RegisterController';
+import SignupController from '../features/Signup/SignupController';
 
 const unauthRouter = Router()
 
 unauthRouter.use(cors())
 
 unauthRouter.use('/signin', SigninController)
-unauthRouter.use('/register', RegisterController)
+unauthRouter.use('/signup', SignupController)
 
-unauthRouter.get('/status', (request: Request, response: Response, next: NextFunction) => {
+unauthRouter.get('/status', (request: Request, response: Response) => {
   return response.status(200).send('available')
 })
+
+export default unauthRouter
