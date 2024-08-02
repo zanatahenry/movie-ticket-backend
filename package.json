@@ -8,7 +8,9 @@
   "license": "MIT",
   "scripts": {
     "commit": "git-cz",
-    "dev": "tsnd --respawn --transpile-only source/main.ts"
+    "dev": "tsnd --respawn --transpile-only source/main.ts",
+    "build": "tsc && yarn copy && sucrase ./source -d ./build --transforms typescript,imports",
+    "start": "node build/main.js"
   },
   "dependencies": {
     "@prisma/client": "5.17.0",
@@ -23,6 +25,8 @@
     "prisma": "^5.17.0",
     "responser": "^2.5.6",
     "responserror": "^1.0.1",
+    "sucrase": "^3.35.0",
+    "tsc": "^2.0.4",
     "typescript": "^5.5.4"
   },
   "devDependencies": {

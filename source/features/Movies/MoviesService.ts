@@ -1,19 +1,24 @@
 import mongoose from "mongoose";
 import PlanModel from "../../models/Plans/PlanModel";
-import { planRepositoryImp } from "../../models/Plans/PlanMongoDB";
+import { PlanRepositoryImp } from "../../models/Plans/PlanMongoDB";
 import { GenreRepositoryImp } from "../../models/Genre/GenreMongoDB";
 import { prismaClient } from "../../globals/Prisma";
 import { ObjectId } from "../../globals/MongoDB";
 import TheMovieDbAPI from "../../vendors/TheMovieDbAPI";
 import { GenreType } from "../../models/Genre/GenreModel";
+import { WatchedMoviesRepositoryImp } from "../../models/WatchedMovies/WatchedMoviesMongoDB";
+import WatchedMoviesModel from "../../models/WatchedMovies/WatchedMoviesModel";
+import { UserPlans } from "@prisma/client";
 
 export class MoviesService {
   constructor (
-    private plansRepositoryImp: typeof planRepositoryImp,
-    private genreRepositoryImp: typeof GenreRepositoryImp
+    private plansRepositoryImp: typeof PlanRepositoryImp,
+    private genreRepositoryImp: typeof GenreRepositoryImp,
+    private watchedMoviesRepositoryImp: typeof WatchedMoviesRepositoryImp
   ) {
     this.plansRepositoryImp = plansRepositoryImp,
-    this.genreRepositoryImp = genreRepositoryImp
+    this.genreRepositoryImp = genreRepositoryImp,
+    this.watchedMoviesRepositoryImp = watchedMoviesRepositoryImp
   }
 
   async list (userId: string) {
@@ -23,14 +28,7 @@ export class MoviesService {
     const userPlans = await prismaClient.userPlans.findMany({ where: { userId } })
     if (!userPlans?.length) throw new Error('Usuário não possui plano assinado!')
 
-    const genres = new Set()
-
-    await Promise.all(userPlans.map(async (userPlan) => {
-      const plan = await this.plansRepositoryImp.findById(ObjectId(userPlan.plan_id))
-      if (!plan || !plan?.genres?.length) return
-
-      plan.genres.forEach(genre => genres.add(genre.code))
-    }))
+    const genres = await this.filterGenresByUserPlan(userPlans)
 
     const movies = await TheMovieDbAPI.findAllMovies(GenreType.movie, { params: {
       page: 1,
@@ -43,9 +41,57 @@ export class MoviesService {
     return movies
   }
 
+
+  async watchMovie (userId: string,  movieId: string) {
+    const user = await prismaClient.user.findUnique({ where: { id: userId } })
+    if (!user) throw new Error('Usuário não encontrado!')
+
+    const userPlans = await prismaClient.userPlans.findMany({ where: { userId } })
+    if (!userPlans?.length) throw new Error('Usuário não possui plano assinado!')
+
+    const genres = await this.filterGenresByUserPlan(userPlans)
+
+    const data = await TheMovieDbAPI.findById(GenreType.movie, movieId, { params: { language: 'pt-br' } })
+    if (!data) throw new Error('Filme não encontrado!')
+
+    const movieGenres = data.genres.filter(moveGenre => Array.from(genres).includes(moveGenre.id))
+
+    const watchedMovie = new WatchedMoviesModel({
+      userId,
+      movieId: data.id,
+      movieTitle: data.title,
+      movieGenreIds: movieGenres
+    })
+
+    await this.watchedMoviesRepositoryImp.create(watchedMovie)
+  }
+
+  async unwatchMovie (userId: string,  movieId: string) {
+    const user = await prismaClient.user.findUnique({ where: { id: userId } })
+    if (!user) throw new Error('Usuário não encontrado!')
+
+    const watchedMovie = await this.watchedMoviesRepositoryImp.findByMovieId(movieId)
+    if (!watchedMovie) new Error('Nenhum filme assistido encontrado com esse identificador!')
+
+    await this.watchedMoviesRepositoryImp.deleteByMovieId(movieId)
+  }
+
+  async filterGenresByUserPlan (userPlans: Array<UserPlans>) {
+    const genres = new Set()
+
+    await Promise.all(userPlans.map(async (userPlan) => {
+      const plan = await this.plansRepositoryImp.findById(ObjectId(userPlan.plan_id))
+      if (!plan || !plan?.genres?.length) return
+
+      plan.genres.forEach(genre => genres.add(genre.code))
+    }))
+
+    return genres
+  }
 }
 
 export const moviesServiceImp = new MoviesService(
-  planRepositoryImp,
-  GenreRepositoryImp
+  PlanRepositoryImp,
+  GenreRepositoryImp,
+  WatchedMoviesRepositoryImp
 )
