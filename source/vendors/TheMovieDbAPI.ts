@@ -28,6 +28,15 @@ class TheMovieDbAPI extends TheMovieDB {
       return error
     }
   }
+
+  async findById (genreType: GenreType, movieId: string, config?: AxiosRequestConfig) {
+    try {
+      const response = await this.API.get(`/${genreType}/${movieId}`, config)
+      return response.data
+    } catch (error) {
+      return error
+    }
+  }
 }
 
 export default new TheMovieDbAPI()

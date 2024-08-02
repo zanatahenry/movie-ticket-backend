@@ -9,6 +9,6 @@ const PlanMongoDB = MongoDB.model<IPlanDocument, IPlanMongoDB>(
   Plan
 )
 
-export const planRepositoryImp = new PlanRepository(PlanMongoDB)
+export const PlanRepositoryImp = new PlanRepository(PlanMongoDB)
 
 export default PlanMongoDB
