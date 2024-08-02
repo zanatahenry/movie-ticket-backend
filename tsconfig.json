@@ -12,6 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "strictPropertyInitialization": false,
+    "moduleResolution": "node",
     "types": [
       "node",
       "express"
