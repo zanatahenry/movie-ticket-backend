@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import jwt from "jsonwebtoken"
+import { prismaClient } from "../globals/Prisma"
+import { User } from "@prisma/client"
 
 const authMiddle = async (request: Request, response: Response, next: NextFunction) => {
   try {
@@ -15,6 +17,12 @@ const authMiddle = async (request: Request, response: Response, next: NextFuncti
       if (error) return response.send_unauthorized('Acesso negado: token expirada.')
 
       if (!result) return response.send_unauthorized('Acesso negado: token inválida.')
+
+      const treatedResult = result as User
+      const user = await prismaClient.user.findUnique({ where: { id: treatedResult.id } })
+      if (!user) return response.send_notFound('Acesso negado: Usuário não encontrado')
+
+      request.userId = user.id
 
       return next()
     })

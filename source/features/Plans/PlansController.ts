@@ -69,6 +69,9 @@ class PlansController extends Controller {
       const { planId } = request.body
 
       try {
+        const plan = await plansServiceImp.findById(ObjectId(planId))
+        if (!plan) return response.send_notFound('Plano não encontrado!')
+
         const deletedPlan = await plansServiceImp.deletePlan(planId)
         if (!deletedPlan) return response.send_badRequest('Ocorreu um problema ao deletar plano!')
 

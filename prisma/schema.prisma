@@ -14,13 +14,26 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String      @id @default(uuid())
   name      String
   cellphone String
-  email     String   @unique
+  email     String      @unique
   password  String
+  plans     UserPlans[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@map("users")
+}
+
+model UserPlans {
+  plan_name String
+  plan_id   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("users")
+  user   User?  @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  @@map("user_plans")
 }
