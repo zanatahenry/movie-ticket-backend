@@ -23,6 +23,7 @@ class TheMovieDbAPI extends TheMovieDB {
   async findAllMovies (genreType: GenreType, config: AxiosRequestConfig) {
     try {
       const response = await this.API.get(`/discover/${genreType}`, config)
+      return response.data
     } catch (error) {
       return error
     }
