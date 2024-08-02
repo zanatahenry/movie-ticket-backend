@@ -16,7 +16,7 @@ export class GenreRepository extends Repository<IGenre, GenreModel> {
   }
 
   async find ({ limit, skip }: IFind): Promise<Array<GenreModel>> {
-    const documents = await this.mongoDB.find({ type: GenreType.movie }).skip(skip).limit(limit)
+    const documents = await this.mongoDB.find().skip(skip).limit(limit)
     const models = (documents || []).map(
       (document) => new GenreModel(document)
     )

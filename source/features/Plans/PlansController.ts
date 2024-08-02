@@ -12,8 +12,6 @@ class PlansController extends Controller {
       try {
         if (genres && !Array.isArray(genres)) return response.send_badRequest('Gênero inválido!')
 
-        // TODO: Validar planos
-
         const newPlan = new PlanModel({
           genres,
           name,

@@ -1,3 +1,4 @@
+import { paginatedDocs } from "../../factory/Pagination";
 import GenreModel, { IGenre } from "../../models/Genre/GenreModel";
 import { GenreRepositoryImp } from "../../models/Genre/GenreMongoDB";
 
@@ -26,23 +27,17 @@ export class GenresService {
 
     const genres = await this.genresRepositoryImp.find({
       limit: size,
-      skip: page * size
+      skip: page === 1 ? 0 : ((page - 1) * size)
     })
 
-    
-    const totalPages = Math.round(totalDocs / size)
-    const paginated: PaginationType<GenreModel> = {
+    const data = paginatedDocs<GenreModel>({
       data: genres,
-      pagination: {
-        totalPages: totalPages,
-        firstPage: page === 1,
-        lastPage: page >= totalPages,
-        pageSize: size,
-        pageNumber: page
-      }
-    }
+      page,
+      size,
+      totalDocs
+    })
 
-    return paginated
+    return data
   }
 
   async countGenres () {

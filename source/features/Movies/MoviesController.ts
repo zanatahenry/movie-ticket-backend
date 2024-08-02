@@ -6,9 +6,10 @@ class MoviesController extends Controller {
   handle(): Router {
     this.router.get('/list', async (request: Request, response: Response, next: NextFunction) => {
       const { userId } = request
+      const { page } = request.query
 
       try {
-        const movies = await moviesServiceImp.list(userId)
+        const movies = await moviesServiceImp.list(userId, Number(page))
 
         return response.send_ok('Filmes encontrados com sucesso!', { movies })
       } catch (error) {

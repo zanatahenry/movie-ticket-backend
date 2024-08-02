@@ -21,7 +21,7 @@ export class MoviesService {
     this.watchedMoviesRepositoryImp = watchedMoviesRepositoryImp
   }
 
-  async list (userId: string) {
+  async list (userId: string, page?: number) {
     const user = await prismaClient.user.findUnique({ where: { id: userId } })
     if (!user) throw new Error('Usuário não encontrado!')
 
@@ -31,7 +31,7 @@ export class MoviesService {
     const genres = await this.filterGenresByUserPlan(userPlans)
 
     const movies = await TheMovieDbAPI.findAllMovies(GenreType.movie, { params: {
-      page: 1,
+      page: page || 1,
       language: 'pt-br',
       include_adult: true,
       sort_by: 'popularity.desc',
