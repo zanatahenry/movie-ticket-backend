@@ -16,6 +16,32 @@ class MoviesController extends Controller {
       }
     })
 
+    this.router.patch('/watch/:movieId', async (request: Request, response: Response, next: NextFunction) => {
+      const { movieId } = request.params
+      const { userId } = request
+
+      try {
+        const movies = await moviesServiceImp.watchMovie(userId, movieId)
+
+        return response.send_ok('Filme atualizado com sucesso!', { movies })
+      } catch (error) {
+        next(error)
+      }
+    })
+
+    this.router.patch('/unwatch/:movieId', async (request: Request, response: Response, next: NextFunction) => {
+      const { movieId } = request.params
+      const { userId } = request
+
+      try {
+        const movies = await moviesServiceImp.unwatchMovie(userId, movieId)
+
+        return response.send_ok('Filme atualizado com sucesso!', { movies })
+      } catch (error) {
+        next(error)
+      }
+    })
+
     return this.router
   }
 }

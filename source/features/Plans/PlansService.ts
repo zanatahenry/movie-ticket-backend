@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import PlanModel from "../../models/Plans/PlanModel";
-import { planRepositoryImp } from "../../models/Plans/PlanMongoDB";
+import { PlanRepositoryImp } from "../../models/Plans/PlanMongoDB";
 
 export class PlansService {
   constructor (
-    private plansRepositoryImp: typeof planRepositoryImp
+    private plansRepositoryImp: typeof PlanRepositoryImp
   ) {
     this.plansRepositoryImp = plansRepositoryImp
   }
@@ -33,4 +33,4 @@ export class PlansService {
   }
 }
 
-export const plansServiceImp = new PlansService(planRepositoryImp)
+export const plansServiceImp = new PlansService(PlanRepositoryImp)
