@@ -10,7 +10,9 @@
     "commit": "git-cz",
     "dev": "tsnd --respawn --transpile-only source/main.ts",
     "build": "tsc && yarn copy && sucrase ./source -d ./build --transforms typescript,imports",
-    "start": "node build/main.js"
+    "start": "node build/main.js",
+    "docker-build": "yarn && yarn start",
+    "docker": "docker compose up"
   },
   "dependencies": {
     "@prisma/client": "5.17.0",
