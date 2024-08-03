@@ -15,12 +15,25 @@ class SignupController extends Controller {
 
         const hashPassword = await bcrypt.hash(body.password, 14)
 
-        await prismaClient.user.create({ data: {
-          password: hashPassword,
-          name: body.name,
-          cellphone: body.cellphone,
-          email: body.email
-        }})
+        await prismaClient.$transaction(async (prisma) => {
+          const user = await prisma.user.create({ 
+            data: {
+              name: body.name,
+              cellphone: body.cellphone,
+              email: body.email
+            }
+          })
+
+          const authentication = await prisma.authentication.create({
+            data: {
+              attempts: 0,
+              password: hashPassword,
+              userId: user.id
+            }
+          })
+
+          return { user, authentication }
+        })
 
         return response.send_ok('Usuário criado com sucesso!')
       } catch (err) {
