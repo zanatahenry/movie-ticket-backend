@@ -19,7 +19,7 @@ interface IPaginate<T> {
 
 export function paginatedDocs<T> ({ totalDocs, size, data, page }: IPaginate<T>): PaginationType<T> {
   const definedSize = size || DEFAULT_PAGE_SIZE
-  const totalPages = Math.round(totalDocs / definedSize)
+  const totalPages = totalDocs >= 10 ? Math.round(totalDocs / definedSize) : 1
 
   const pagination: PaginationType<T> = {
     data,

@@ -6,6 +6,24 @@ import { ObjectId } from "../../globals/MongoDB";
 
 class PlansController extends Controller {
   handle(): Router {
+    this.router.get('/list', async (request: Request, response: Response, next: NextFunction) => {
+      const { page, pageSize, search } = request.query
+
+      try {
+        const pageCount = Boolean(Number(page)) ? Number(page) : 1
+
+        const allPlans = await plansServiceImp.list({
+          page: pageCount, 
+          pageSize: Number(pageSize),
+          search
+        })
+
+        return response.send_ok('Plano de assinautura encontrados com sucesso!', { plans: allPlans })
+      } catch (error) {
+        next(error)
+      }
+    })
+
     this.router.post('/', async (request: Request, response: Response, next: NextFunction) => {
       const { genres, name, version } = request.body
 

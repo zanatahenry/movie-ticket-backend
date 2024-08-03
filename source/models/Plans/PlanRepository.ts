@@ -1,6 +1,13 @@
 import { QueryOptions, Types, UpdateQuery } from "mongoose";
 import { Repository } from "../../factory/Repository";
 import PlanModel, { IPlan } from "./PlanModel";
+import { FilterQuery } from "mongoose";
+
+interface IFind {
+  skip: number
+  limit: number
+  search?: string
+}
 
 export class PlanRepository extends Repository<IPlan, PlanModel> {
   async create (model: PlanModel, options?: QueryOptions<any>): Promise<PlanModel | null> {
@@ -26,6 +33,28 @@ export class PlanRepository extends Repository<IPlan, PlanModel> {
     if (!document) return null
 
     return new PlanModel(document)
+  }
+
+  async find ({ limit, skip, search }: IFind): Promise<Array<PlanModel>> {
+    const possibleFilters: FilterQuery<IPlan> = {}
+
+    if (search) Object.assign(possibleFilters, { name: { $regex: search, $options: "i" } })
+
+    const hasActiveFilters = Object.values(possibleFilters).length > 0
+
+    const documents = await this.mongoDB.find(possibleFilters)
+    .skip(hasActiveFilters ? 0 : skip)
+    .limit(hasActiveFilters ? 0 : limit)
+    const models = (documents || []).map(
+      (document) => new PlanModel(document)
+    )
+
+    return models
+  }
+
+  async count () {
+    const documents = await this.mongoDB.countDocuments({})
+    return documents
   }
 
   async delete (id: Types.ObjectId) {
