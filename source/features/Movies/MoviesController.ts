@@ -22,9 +22,9 @@ class MoviesController extends Controller {
       const { userId } = request
 
       try {
-        const movies = await moviesServiceImp.watchMovie(userId, movieId)
+        await moviesServiceImp.watchMovie(userId, movieId)
 
-        return response.send_ok('Filme atualizado com sucesso!', { movies })
+        return response.send_ok('Filme atualizado com sucesso!')
       } catch (error) {
         next(error)
       }
@@ -35,9 +35,21 @@ class MoviesController extends Controller {
       const { userId } = request
 
       try {
-        const movies = await moviesServiceImp.unwatchMovie(userId, movieId)
+        await moviesServiceImp.unwatchMovie(userId, movieId)
 
-        return response.send_ok('Filme atualizado com sucesso!', { movies })
+        return response.send_ok('Filme atualizado com sucesso!')
+      } catch (error) {
+        next(error)
+      }
+    })
+
+    this.router.get('/watched/report/:userId', async (request: Request, response: Response, next: NextFunction) => {
+      const { userId } = request.params
+
+      try {
+        const report = await moviesServiceImp.report(userId)
+
+        return response.send_ok('Relatório encontrado com sucesso!', { report })
       } catch (error) {
         next(error)
       }

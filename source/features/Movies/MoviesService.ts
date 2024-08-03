@@ -9,6 +9,23 @@ import { GenreType } from "../../models/Genre/GenreModel";
 import { WatchedMoviesRepositoryImp } from "../../models/WatchedMovies/WatchedMoviesMongoDB";
 import WatchedMoviesModel from "../../models/WatchedMovies/WatchedMoviesModel";
 import { UserPlans } from "@prisma/client";
+import { paginatedDocs } from "../../factory/Pagination";
+
+export interface IMostWatchedTheme {
+  themeId: string
+  themeName: string
+  totalWatchedMovies: number
+}
+
+interface IReport {
+  userId: string
+  totalWatchedMovies: number
+  mostWatchedTheme: IMostWatchedTheme
+  lastMovieWatched: {
+    movieId: string
+    movieName: string
+  }
+}
 
 export class MoviesService {
   constructor (
@@ -38,7 +55,14 @@ export class MoviesService {
       with_genres: Array.from(genres).join(',')
     }})
 
-    return movies
+    const paginated = paginatedDocs({
+      page: movies.page,
+      data: movies.results,
+      totalDocs: movies.total_results,
+      size: movies?.results?.length
+    })
+
+    return paginated
   }
 
 
@@ -87,6 +111,26 @@ export class MoviesService {
     }))
 
     return genres
+  }
+
+  async report (userId: string) {
+    const totalWatchedMovies = await this.watchedMoviesRepositoryImp.totalWatchedMoviesByUserId(userId)
+    if (!totalWatchedMovies) throw new Error('Usuário não assistiu nenhum filme!')
+
+    const lastWatchedMovie = await this.watchedMoviesRepositoryImp.findLastWatchedMovie(userId)
+    const mostWatchedTheme = await this.watchedMoviesRepositoryImp.findMostWatchedTheme(userId)
+
+    const data: IReport = {
+      userId,
+      totalWatchedMovies,
+      mostWatchedTheme,
+      lastMovieWatched: {
+        movieId: String(lastWatchedMovie?.movieId),
+        movieName: String(lastWatchedMovie?.movieTitle)
+      }
+    }
+
+    return data
   }
 }
 
