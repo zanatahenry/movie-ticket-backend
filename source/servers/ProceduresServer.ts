@@ -16,7 +16,6 @@ export default class ProceduresServer {
 
   async runProcedures (procedures: Array<Procedure>): Promise<void> {
     for (const procedure of procedures) {
-      console.log(procedure)
       console.info(`${procedure.constructor.name} RUNNING...`)
 
       await procedure.run()

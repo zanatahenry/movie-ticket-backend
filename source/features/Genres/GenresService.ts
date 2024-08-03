@@ -1,17 +1,13 @@
-import { paginatedDocs } from "../../factory/Pagination";
-import GenreModel, { IGenre } from "../../models/Genre/GenreModel";
+import { DEFAULT_PAGE_SIZE, paginatedDocs } from "../../factory/Pagination";
+import GenreModel from "../../models/Genre/GenreModel";
 import { GenreRepositoryImp } from "../../models/Genre/GenreMongoDB";
 
-const DEFAULT_PAGE_SIZE = 10;
-export interface PaginationType<T> {
-  data:Array <T>
-  pagination:{
-  pageNumber:number,
-  pageSize:number,
-  totalPages:number,
-  lastPage:boolean,
-  firstPage:boolean
-  }
+export interface IList {
+  search?: any
+  id?: any
+  code?: any
+  page: number
+  pageSize?: number
 }
 
 export class GenresService {
@@ -21,11 +17,14 @@ export class GenresService {
     this.genresRepositoryImp = genresRepositoryImp
   }
 
-  async list (page: number, pageSize?: number) {
+  async list ({ page, pageSize, code, id, search }: IList) {
     const totalDocs = await this.countGenres()
     const size = pageSize || DEFAULT_PAGE_SIZE
 
     const genres = await this.genresRepositoryImp.find({
+      code, 
+      id,
+      search,
       limit: size,
       skip: page === 1 ? 0 : ((page - 1) * size)
     })

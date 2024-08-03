@@ -5,12 +5,18 @@ import { genresServiceImp } from "./GenresService";
 class GenresController extends Controller {
   handle(): Router {
     this.router.get('/', async (request: Request, response: Response, next: NextFunction) => {
-      const { page, pageSize, search } = request.query
+      const { page, pageSize, search, code, id } = request.query
 
       try {
         const pageCount = Boolean(Number(page)) ? Number(page) : 1
 
-        const allGenres = await genresServiceImp.list(pageCount, Number(pageSize))
+        const allGenres = await genresServiceImp.list({
+          page: pageCount, 
+          pageSize: Number(pageSize),
+          code,
+          id,
+          search
+        })
 
         return response.send_ok('Gêneros encontrados com sucesso!', { genres: allGenres })
       } catch (error) {

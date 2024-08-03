@@ -16,7 +16,7 @@ class GenerateGenres extends Procedure {
       const findGenres = await genresServiceImp.countGenres()
 
       if (!findGenres) {
-        Promise.all(GenreTypeValues.map(async type => {
+        await Promise.all(GenreTypeValues.map(async type => {
           const data = await TheMovieDbAPI.listGenres(type, { params: { language: 'pt-br' } })
           if (!data?.genres?.length) throw new Error('Nenhum gênero encontrado!')
   

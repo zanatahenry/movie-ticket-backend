@@ -8,7 +8,7 @@ import applicationRouter from '../routes/applicationRouter';
 
 export default class ApplicationServer extends Server {
   constructor () {
-    super (Number(process.env.PORT))
+    super(Number(process.env.PORT))
   }
 
   public run = () => {

@@ -1,10 +1,13 @@
-import { QueryOptions, Types } from "mongoose";
+import { FilterQuery, QueryOptions, Types } from "mongoose";
 import { Repository } from "../../factory/Repository";
 import GenreModel, { GenreType, IGenre } from "./GenreModel";
 
 interface IFind {
   skip: number
   limit: number
+  search?: string
+  id?: string
+  code?: string
 }
 
 export class GenreRepository extends Repository<IGenre, GenreModel> {
@@ -15,8 +18,18 @@ export class GenreRepository extends Repository<IGenre, GenreModel> {
     return new GenreModel(created[0])
   }
 
-  async find ({ limit, skip }: IFind): Promise<Array<GenreModel>> {
-    const documents = await this.mongoDB.find().skip(skip).limit(limit)
+  async find ({ limit, skip, code, id, search }: IFind): Promise<Array<GenreModel>> {
+    const possibleFilters: FilterQuery<IGenre> = {}
+
+    if (search) Object.assign(possibleFilters, { name: { $regex: search, $options: "i" } })
+    if (code) Object.assign(possibleFilters, { code })
+    if (id) Object.assign(possibleFilters, { _id: id })
+
+    const hasActiveFilters = Object.values(possibleFilters).length > 0
+
+    const documents = await this.mongoDB.find(possibleFilters)
+    .skip(hasActiveFilters ? 0 : skip)
+    .limit(hasActiveFilters ? 0 : limit)
     const models = (documents || []).map(
       (document) => new GenreModel(document)
     )
