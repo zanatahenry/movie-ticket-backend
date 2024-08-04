@@ -50,6 +50,13 @@ export class GenresService {
 
     return createdGenre
   }
+
+  async findByCode (code: string) {
+    const document = await this.genresRepositoryImp.findByCode(code)
+    if (!document) return null
+
+    return document
+  }
 }
 
 export const genresServiceImp = new GenresService(GenreRepositoryImp)

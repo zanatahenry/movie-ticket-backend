@@ -44,9 +44,15 @@ export class GenreRepository extends Repository<IGenre, GenreModel> {
     return new GenreModel(document)
   }
 
-
   async count () {
     const documents = await this.mongoDB.countDocuments({})
+    return documents
+  }
+
+  async findByCode (code: string) {
+    const documents = await this.mongoDB.findOne({ code })
+    if (!document) return null
+
     return documents
   }
 }

@@ -3,6 +3,8 @@ import { Controller } from "../../factory/Controller"
 import PlanModel from "../../models/Plans/PlanModel"
 import { plansServiceImp } from "./PlansService"
 import { ObjectId } from "../../globals/MongoDB"
+import { genresServiceImp } from "../Genres/GenresService"
+import { IGenre } from "../../models/Genre/GenreModel"
 
 class PlansController extends Controller {
   handle(): Router {
@@ -29,6 +31,11 @@ class PlansController extends Controller {
 
       try {
         if (genres && !Array.isArray(genres)) return response.send_badRequest('Gênero inválido!')
+
+        await Promise.all(genres.map(async genre => {
+          const existsGenre = await genresServiceImp.findByCode(genre.code)
+          if (!existsGenre) return response.send_badRequest('Gênero inexistente!', { genre })
+        }))
 
         const newPlan = new PlanModel({
           genres,
