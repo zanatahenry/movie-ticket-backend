@@ -35,7 +35,7 @@ class SignupController extends Controller {
           return { user, authentication }
         })
 
-        return response.send_ok('Usuário criado com sucesso!')
+        return response.send_created('Usuário criado com sucesso!')
       } catch (err) {
         next(err)
       }
