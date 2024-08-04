@@ -1,7 +1,7 @@
 ## Getting Started
 1. Clone this repository:
 ```bash
-  git clone https://github.com/zanatahenry/movie-challenge
+  git clone https://github.com/zanatahenry/movie-challenge.git
 ```
 2. Install the dependencies:
 ```bash
