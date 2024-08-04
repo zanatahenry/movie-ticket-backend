@@ -39,7 +39,7 @@ class PlansController extends Controller {
         const createdPlan = await plansServiceImp.create(newPlan)
         if (!createdPlan) return response.send_badRequest('Ocorreu um problema ao cadastrar plano!')
 
-        return response.send_ok('Plano de assinautura criado com sucesso!', { plan: createdPlan._id })
+        return response.send_created('Plano de assinatura criada com sucesso!', { plan: createdPlan._id })
       } catch (error) {
         next(error)
       }
