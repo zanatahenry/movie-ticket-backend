@@ -26,6 +26,6 @@ export default class ApplicationServer extends Server {
 
     applicationServer.use(errorHandler)
 
-    server.listen(this.port, "127.0.0.1", this.listener)
+    server.listen(this.port, this.listener)
   }
 }

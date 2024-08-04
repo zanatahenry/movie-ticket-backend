@@ -1,24 +1,42 @@
 version: '3.8'
 
 services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_USER: administrator
+      MYSQL_PASSWORD: admin12345
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: movie-challenge-db
+    ports:
+      - "3307:3306"
+    expose:
+      - 3306
+    networks:
+      - bridge
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
+
   movies-back-end:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: yarn docker-build
-  
-  db:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: movie-challenge-db
-    ports:
-      - "3306:3306"
+    networks:
+      - bridge
+    command: sh -c "yarn prisma migrate deploy && yarn docker-build"
+
+networks:
+  bridge:
+    driver: bridge

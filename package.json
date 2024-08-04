@@ -11,7 +11,7 @@
     "dev": "tsnd --respawn --transpile-only source/main.ts",
     "build": "tsc && yarn copy && sucrase ./source -d ./build --transforms typescript,imports",
     "start": "node build/main.js",
-    "docker-build": "yarn && yarn start",
+    "docker-build": "yarn && yarn dev",
     "docker": "docker compose up"
   },
   "dependencies": {
