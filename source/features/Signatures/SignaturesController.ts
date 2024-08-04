@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response, Router } from "express";
-import { Controller } from "../../factory/Controller";
-import { prismaClient } from "../../globals/Prisma";
-import { ObjectId } from "../../globals/MongoDB";
-import { plansServiceImp } from "../Plans/PlansService";
+import { NextFunction, Request, Response, Router } from "express"
+import { Controller } from "../../factory/Controller"
+import { prismaClient } from "../../globals/Prisma"
+import { ObjectId } from "../../globals/MongoDB"
+import { plansServiceImp } from "../Plans/PlansService"
 
 class SignaturesController extends Controller {
   handle(): Router {

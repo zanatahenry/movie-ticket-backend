@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt'
 
-import { NextFunction, Request, Response, Router } from "express";
-import { Controller } from "../../../factory/Controller";
-import { prismaClient } from "../../../globals/Prisma";
-import { isPassedThreeHours } from '../../../globals/Time';
+import { NextFunction, Request, Response, Router } from "express"
+import { Controller } from "../../../factory/Controller"
+import { prismaClient } from "../../../globals/Prisma"
+import { isPassedThreeHours } from '../../../globals/Time'
 
 class ResetPasswordController extends Controller {
   handle(): Router {

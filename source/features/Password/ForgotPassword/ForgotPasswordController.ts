@@ -1,9 +1,8 @@
 import crypto from 'crypto'
 
-import { NextFunction, Request, Response, Router } from "express";
-import { Controller } from "../../../factory/Controller";
-import { prismaClient } from "../../../globals/Prisma";
-import { generateAlphanumeric } from "../../../helpers/generate";
+import { NextFunction, Request, Response, Router } from "express"
+import { Controller } from "../../../factory/Controller"
+import { prismaClient } from "../../../globals/Prisma"
 
 class ForgotPasswordController extends Controller {
   handle(): Router {

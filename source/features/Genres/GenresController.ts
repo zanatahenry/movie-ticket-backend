@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response, Router } from "express";
-import { Controller } from "../../factory/Controller";
-import { genresServiceImp } from "./GenresService";
+import { NextFunction, Request, Response, Router } from "express"
+import { Controller } from "../../factory/Controller"
+import { genresServiceImp } from "./GenresService"
 
 class GenresController extends Controller {
   handle(): Router {

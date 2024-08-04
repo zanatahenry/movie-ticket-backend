@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response, Router } from "express";
-import { Controller } from "../../factory/Controller";
-import PlanModel from "../../models/Plans/PlanModel";
-import { plansServiceImp } from "./PlansService";
-import { ObjectId } from "../../globals/MongoDB";
+import { NextFunction, Request, Response, Router } from "express"
+import { Controller } from "../../factory/Controller"
+import PlanModel from "../../models/Plans/PlanModel"
+import { plansServiceImp } from "./PlansService"
+import { ObjectId } from "../../globals/MongoDB"
 
 class PlansController extends Controller {
   handle(): Router {

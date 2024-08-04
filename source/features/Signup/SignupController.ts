@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt'
 
-import { NextFunction, Router, Response, Request } from "express";
-import { Controller } from "../../factory/Controller";
-import { prismaClient } from "../../globals/Prisma";
+import { NextFunction, Router, Response, Request } from "express"
+import { Controller } from "../../factory/Controller"
+import { prismaClient } from "../../globals/Prisma"
 
 class SignupController extends Controller {
   handle(): Router {

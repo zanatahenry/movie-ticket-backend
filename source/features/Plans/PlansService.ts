@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import PlanModel from "../../models/Plans/PlanModel";
-import { PlanRepositoryImp } from "../../models/Plans/PlanMongoDB";
-import { DEFAULT_PAGE_SIZE, paginatedDocs } from "../../factory/Pagination";
+import mongoose from "mongoose"
+import PlanModel from "../../models/Plans/PlanModel"
+import { PlanRepositoryImp } from "../../models/Plans/PlanMongoDB"
+import { DEFAULT_PAGE_SIZE, paginatedDocs } from "../../factory/Pagination"
 
 interface IList {
   search?: any

@@ -1,15 +1,13 @@
-import mongoose from "mongoose";
-import PlanModel from "../../models/Plans/PlanModel";
-import { PlanRepositoryImp } from "../../models/Plans/PlanMongoDB";
-import { GenreRepositoryImp } from "../../models/Genre/GenreMongoDB";
-import { prismaClient } from "../../globals/Prisma";
-import { ObjectId } from "../../globals/MongoDB";
-import TheMovieDbAPI from "../../vendors/TheMovieDbAPI";
-import { GenreType } from "../../models/Genre/GenreModel";
-import { WatchedMoviesRepositoryImp } from "../../models/WatchedMovies/WatchedMoviesMongoDB";
-import WatchedMoviesModel from "../../models/WatchedMovies/WatchedMoviesModel";
-import { UserPlans } from "@prisma/client";
-import { paginatedDocs } from "../../factory/Pagination";
+import { PlanRepositoryImp } from "../../models/Plans/PlanMongoDB"
+import { GenreRepositoryImp } from "../../models/Genre/GenreMongoDB"
+import { prismaClient } from "../../globals/Prisma"
+import { ObjectId } from "../../globals/MongoDB"
+import TheMovieDbAPI from "../../vendors/TheMovieDbAPI"
+import { GenreType } from "../../models/Genre/GenreModel"
+import { WatchedMoviesRepositoryImp } from "../../models/WatchedMovies/WatchedMoviesMongoDB"
+import WatchedMoviesModel from "../../models/WatchedMovies/WatchedMoviesModel"
+import { UserPlans } from "@prisma/client"
+import { paginatedDocs } from "../../factory/Pagination"
 
 export interface IMostWatchedTheme {
   themeId: string

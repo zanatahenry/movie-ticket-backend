@@ -1,6 +1,6 @@
-import { DEFAULT_PAGE_SIZE, paginatedDocs } from "../../factory/Pagination";
-import GenreModel from "../../models/Genre/GenreModel";
-import { GenreRepositoryImp } from "../../models/Genre/GenreMongoDB";
+import { DEFAULT_PAGE_SIZE, paginatedDocs } from "../../factory/Pagination"
+import GenreModel from "../../models/Genre/GenreModel"
+import { GenreRepositoryImp } from "../../models/Genre/GenreMongoDB"
 
 export interface IList {
   search?: any
