@@ -1,5 +1,5 @@
 import { DEFAULT_PAGE_SIZE, paginatedDocs } from "../../factory/Pagination"
-import GenreModel from "../../models/Genre/GenreModel"
+import GenreModel, { IGenre } from "../../models/Genre/GenreModel"
 import { GenreRepositoryImp } from "../../models/Genre/GenreMongoDB"
 
 export interface IList {
@@ -51,11 +51,13 @@ export class GenresService {
     return createdGenre
   }
 
-  async findByCode (code: string) {
-    const document = await this.genresRepositoryImp.findByCode(code)
-    if (!document) return null
+  async existsGenres (genres: Array<IGenre>) {
+    for (const genre of genres) {
+      const document = await this.genresRepositoryImp.findByCode(String(genre.code))
+      if (!document) return { exists: false, error: genre }
+    }
 
-    return document
+    return { exists: true, error: null }
   }
 }
 

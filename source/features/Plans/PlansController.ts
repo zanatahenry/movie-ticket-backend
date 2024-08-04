@@ -30,12 +30,10 @@ class PlansController extends Controller {
       const { genres, name, version } = request.body
 
       try {
-        if (genres && !Array.isArray(genres)) return response.send_badRequest('Gênero inválido!')
+        if (!genres || (!genres?.length && !Array.isArray(genres))) return response.send_badRequest('Gênero inválido!')
 
-        await Promise.all(genres.map(async genre => {
-          const existsGenre = await genresServiceImp.findByCode(genre.code)
-          if (!existsGenre) return response.send_badRequest('Gênero inexistente!', { genre })
-        }))
+        const existsGenre = await genresServiceImp.existsGenres(genres)
+        if (!existsGenre.exists) return response.send_badRequest('Gênero inexistente!', { genre: existsGenre.error })
 
         const newPlan = new PlanModel({
           genres,

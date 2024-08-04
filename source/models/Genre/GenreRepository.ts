@@ -50,9 +50,9 @@ export class GenreRepository extends Repository<IGenre, GenreModel> {
   }
 
   async findByCode (code: string) {
-    const documents = await this.mongoDB.findOne({ code })
+    const document = await this.mongoDB.findOne({ code })
     if (!document) return null
 
-    return documents
+    return document
   }
 }
