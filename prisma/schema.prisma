@@ -14,16 +14,34 @@ datasource db {
 }
 
 model User {
-  id        String      @id @default(uuid())
+  id        String @id @default(uuid())
   name      String
   cellphone String
-  email     String      @unique
-  password  String
-  plans     UserPlans[]
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  email     String @unique
+
+  authentication Authentication?
+  plans          UserPlans[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 
   @@map("users")
+}
+
+model Authentication {
+  useruser User?  @relation(fields: [userId], references: [id])
+  userId   String @unique
+
+  recuperationCode        String?
+  recuperationSolicitedAt DateTime?
+
+  password    String
+  attempts    Int?
+  lastAttempt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("authentications")
 }
 
 model UserPlans {
