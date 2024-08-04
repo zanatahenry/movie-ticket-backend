@@ -8,7 +8,7 @@ RUN yarn install
 
 COPY . /app
 
-RUN yarn prisma generate
+RUN yarn prisma migrate deploy
 
 RUN yarn build
 
