@@ -45,7 +45,8 @@
 
 ### If you are not using Docker, follow these steps:
 
-> [!NOTE] If you need to run the MongoDB and MySQL locally, run these commands:
+> [!NOTE]
+>  If you need to run the MongoDB and MySQL locally, run these commands:
 > ```bash
 > docker run --name movie-ticket-mongodb -d mongo:latest
 > docker run --name movie-ticket-sql --env-file .env -d mysql:5.7
