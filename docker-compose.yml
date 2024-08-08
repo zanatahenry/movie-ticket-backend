@@ -4,11 +4,8 @@ services:
   db:
     image: mysql:5.7
     restart: always
-    environment:
-      MYSQL_USER: administrator
-      MYSQL_PASSWORD: admin12345
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: movie-challenge-db
+    env_file:
+      - .env
     ports:
       - "3307:3306"
     expose:

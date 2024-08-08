@@ -1,0 +1,802 @@
+{
+	"info": {
+		"_postman_id": "ea2dcc5a-93bc-4ab1-a9bf-cc5cf3ff7db5",
+		"name": "Movie Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17018426"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Genres",
+					"item": [
+						{
+							"name": "List all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/genres?page=4",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"genres"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "Aventura",
+											"disabled": true
+										},
+										{
+											"key": "code",
+											"value": "28",
+											"disabled": true
+										},
+										{
+											"key": "id",
+											"value": "66abdc707ded37b29ee3e0c5",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "4"
+										}
+									]
+								},
+								"description": "This authenticated route is used to list all movie genres available from The Movie Database (TMDb) API.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Query Parameters:**\n\n- `page` (number, optional): Page number for pagination.\n    \n- `code` (string, optional): Genre code.\n    \n- `id` (objectId, optional): Genre ID.\n    \n- `search` (string, optional): Search term to find genres by name.\n    \n- `pageSize` (number, optional): Number of genres per page."
+							},
+							"response": [
+								{
+									"name": "200",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/genres?page=1",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"genres"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1781"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"6f5-/tjA384GkJehSmcjtMUOLBjCAb0\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 01 Aug 2024 20:09:31 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"OK\",\n    \"code\": 200,\n    \"success\": true,\n    \"message\": \"Gêneros encontrados com sucesso!\",\n    \"data\": {\n        \"genres\": {\n            \"data\": [\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0d3\",\n                    \"createdAt\": \"2024-08-01T19:05:21.001Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.001Z\",\n                    \"name\": \"Documentário\",\n                    \"code\": \"99\",\n                    \"type\": \"movie\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0d5\",\n                    \"createdAt\": \"2024-08-01T19:05:21.007Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.007Z\",\n                    \"name\": \"Drama\",\n                    \"code\": \"18\",\n                    \"type\": \"tv\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0d7\",\n                    \"createdAt\": \"2024-08-01T19:05:21.016Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.016Z\",\n                    \"name\": \"Drama\",\n                    \"code\": \"18\",\n                    \"type\": \"movie\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0d9\",\n                    \"createdAt\": \"2024-08-01T19:05:21.027Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.027Z\",\n                    \"name\": \"Família\",\n                    \"code\": \"10751\",\n                    \"type\": \"tv\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0db\",\n                    \"createdAt\": \"2024-08-01T19:05:21.033Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.033Z\",\n                    \"name\": \"Família\",\n                    \"code\": \"10751\",\n                    \"type\": \"movie\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0dd\",\n                    \"createdAt\": \"2024-08-01T19:05:21.045Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.045Z\",\n                    \"name\": \"Kids\",\n                    \"code\": \"10762\",\n                    \"type\": \"tv\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0df\",\n                    \"createdAt\": \"2024-08-01T19:05:21.049Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.049Z\",\n                    \"name\": \"Fantasia\",\n                    \"code\": \"14\",\n                    \"type\": \"movie\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0e1\",\n                    \"createdAt\": \"2024-08-01T19:05:21.062Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.062Z\",\n                    \"name\": \"Mistério\",\n                    \"code\": \"9648\",\n                    \"type\": \"tv\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0e3\",\n                    \"createdAt\": \"2024-08-01T19:05:21.066Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.066Z\",\n                    \"name\": \"História\",\n                    \"code\": \"36\",\n                    \"type\": \"movie\"\n                },\n                {\n                    \"_id\": \"66abdc717ded37b29ee3e0e5\",\n                    \"createdAt\": \"2024-08-01T19:05:21.077Z\",\n                    \"updatedAt\": \"2024-08-01T19:05:21.077Z\",\n                    \"name\": \"News\",\n                    \"code\": \"10763\",\n                    \"type\": \"tv\"\n                }\n            ],\n            \"pagination\": {\n                \"totalPages\": 4,\n                \"firstPage\": true,\n                \"lastPage\": false,\n                \"pageSize\": 10,\n                \"pageNumber\": 1\n            }\n        }\n    }\n}"
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Plans",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Plano PRO\",\n    \"version\": \"1\",\n    \"genres\": [\n        { \"code\": 939, \"name\": \"Documentário\"  }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/plans",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"plans"
+									]
+								},
+								"description": "This route is used to create new plans in the application, specifying the genres that the plan will include. Depending on the genres provided, the movies will be fetched automatically.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Request Body Parameters (JSON):**\n\n- `name` (string): Name of the plan.\n- `version` (string, optional): Version of the plan.\n- `genres` (array): List of genre code and name, that the plan will include."
+							},
+							"response": [
+								{
+									"name": "200",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Plano inicial\",\n    \"version\": \"1\",\n    \"genres\": [\n        { \"code\": 99, \"name\": \"Documentário\"  }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/plans",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"plans"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "137"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"89-LKICZTphfVrz15udwbl3yng4gvs\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 01 Aug 2024 21:19:15 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"OK\",\n    \"code\": 200,\n    \"success\": true,\n    \"message\": \"Plano de assinautura criado com sucesso!\",\n    \"data\": {\n        \"plan\": \"66abfbd37bb1f5ba4c9fcf17\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"planId\": \"66abfbd37bb1f5ba4c9fcf17\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/plans/delete",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"plans",
+										"delete"
+									]
+								},
+								"description": "This route is used to delete an existing plan in the application based on the `planId`.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Path Parameters:**\n\n- `planId` (string): ID of the plan to be deleted."
+							},
+							"response": []
+						},
+						{
+							"name": "Find By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/plans/66abff2e54a5c64e0ef9c322",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"plans",
+										"66abff2e54a5c64e0ef9c322"
+									]
+								},
+								"description": "This route is used to retrieve information about an existing plan in the application based on the `planId`.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Path Parameters:**\n\n- `planId` (string): ID of the plan to be retrieved."
+							},
+							"response": [
+								{
+									"name": "200",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://127.0.0.1:8000/auth/plans/66abff2e54a5c64e0ef9c322",
+											"protocol": "http",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "8000",
+											"path": [
+												"auth",
+												"plans",
+												"66abff2e54a5c64e0ef9c322"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "307"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"133-i6WsZ3rTszjVDIxRArt50OFRDTI\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 03 Aug 2024 03:03:19 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"OK\",\n    \"code\": 200,\n    \"success\": true,\n    \"message\": \"Plano de assinautura encontrado com sucesso!\",\n    \"data\": {\n        \"plan\": {\n            \"_id\": \"66abff2e54a5c64e0ef9c322\",\n            \"createdAt\": \"2024-08-01T21:33:34.246Z\",\n            \"updatedAt\": \"2024-08-01T21:52:17.414Z\",\n            \"name\": \"Atualizado\",\n            \"genres\": [\n                {\n                    \"code\": 99,\n                    \"name\": \"Documentário\"\n                }\n            ],\n            \"version\": \"1\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Update By ID",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Atualizado\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/plans/66abff2e54a5c64e0ef9c322/update",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"plans",
+										"66abff2e54a5c64e0ef9c322",
+										"update"
+									]
+								},
+								"description": "This route is used to update the information of an existing plan in the application based on the `planId`. You can update the plan's name, version, and associated genres.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Path Parameters:**\n\n- `planId` (string): ID of the plan to be updated.\n    \n\n**Request Body Parameters (JSON):**\n\n- `name` (string, optional): New name of the plan.\n    \n- \\`version\\` (string, optional): New description of the plan.\n    \n- `genres` (array, optional): New list of genre IDs that the plan will include."
+							},
+							"response": []
+						},
+						{
+							"name": "List all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/plans/list",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"plans",
+										"list"
+									]
+								},
+								"description": "This route is used to list all existing plans in the application. The route allows optional filters, such as pagination and searching by name.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Query Parameters:**\n\n- `page` (number, optional): Page number for pagination.\n    \n- `pageSize` (number, optional): Number of plans per page.\n    \n- `search` (string, optional): Search term to find plans by name."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Signatures",
+					"item": [
+						{
+							"name": "Subscribe plan",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"planId\": \"66abff2e54a5c64e0ef9c322\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/signatures/subscribe",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"signatures",
+										"subscribe"
+									]
+								},
+								"description": "This route is used for a user to subscribe to an existing plan in the application, linked to their profile.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Request Body Parameters (JSON):**\n\n- `planId` (string): ID of the plan the user wants to subscribe to."
+							},
+							"response": []
+						},
+						{
+							"name": "Unsubscribe plan",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"planId\": \"66abff2e54a5c64e0ef9c322\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/signatures/unsubscribe-plan",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"signatures",
+										"unsubscribe-plan"
+									]
+								},
+								"description": "This route is used for a user to cancel their subscription to an existing plan in the application.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Path Parameters:**\n\n- \\`planId\\` (string): ID of the user canceling the subscription."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Movies",
+					"item": [
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/movies/list?page=2",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"movies",
+										"list"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								},
+								"description": "This route is used to list movies that match the genres associated with a specific plan. The movie list is filtered based on the genres of the plan subscribed to by the user.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Query Parameters:**\n\n- `page` (number, optional): Page number for pagination."
+							},
+							"response": []
+						},
+						{
+							"name": "Unwatch",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/movies/unwatch/1203397",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"movies",
+										"unwatch",
+										"1203397"
+									]
+								},
+								"description": "This route is used to remove a movie from the user's watched movies list. The movie is identified by the `movieId.`\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Path Parameters:**\n\n- `movieId` (string): ID of the movie being removed from the watched list."
+							},
+							"response": []
+						},
+						{
+							"name": "Watch",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/movies/watch/1018931",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"movies",
+										"watch",
+										"1018931"
+									]
+								},
+								"description": "This route is used to mark a movie as watched by the user. The movie is identified by the `movieId`, and the information is recorded in the user's profile.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Path Parameters:**\n\n- `movieId` (string): ID of the movie being marked as watched."
+							},
+							"response": []
+						},
+						{
+							"name": "Report",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/auth/movies/watched/report/:userId",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"movies",
+										"watched",
+										"report",
+										":userId"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "bec1007a-1768-4c59-b0d6-e929b3676cb7"
+										}
+									]
+								},
+								"description": "This route is used to generate reports on the user's movie activity. The report includes the most-watched genres, the last watched movie, and the total number of movies watched.\n\n**Request Headers:**\n\n- `Authorization` (string): JWT authentication token.\n    \n\n**Path Parameters:**\n\n- `userId` (string): ID of the user for whom the reports will be generated."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Unauth",
+			"item": [
+				{
+					"name": "Signup",
+					"item": [
+						{
+							"name": "Signup",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"henryzanata@outlook.com\",\n    \"password\": \"senha123\",\n    \"name\": \"Henry Zanata\",\n    \"cellphone\": \"15981446581\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/unauth/signup",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"unauth",
+										"signup"
+									]
+								},
+								"description": "This route is used to register new users in the application.\n\n**Request Body Parameters (JSON):**\n\n- `name` (string): Full name of the user.\n    \n- `email` (string): User's email address. Must be unique.\n    \n- `password` (string): User's password.\n    \n- `phone` (string): User's phone number."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Signin",
+					"item": [
+						{
+							"name": "Signin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const token = pm.response.json()?.data?.token",
+											"",
+											"if (token) {",
+											"  pm.environment.set(\"BASE_TOKEN\", token);",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"henryzanata@outlook.com\",\n    \"password\": \"senha123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/unauth/signin",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"unauth",
+										"signin"
+									]
+								},
+								"description": "This route is used to authenticate users in the application.\n\n**Request Body Parameters (JSON):**\n\n- `email` (string): User's email address.\n    \n- `password` (string): User's password."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Password",
+					"item": [
+						{
+							"name": "Forgot password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"henryzanata@outlook.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/unauth/forgot-password",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"unauth",
+										"forgot-password"
+									]
+								},
+								"description": "This route is used to generate a password reset token for users who have forgotten their password.\n\n**Request Body Parameters (JSON):**\n\n- `email` (string): User's email address."
+							},
+							"response": [
+								{
+									"name": "200",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"henryzanata@outlook.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}/unauth/forgot-password",
+											"host": [
+												"{{BASE_URL}}"
+											],
+											"path": [
+												"unauth",
+												"forgot-password"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "159"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"9f-G2jDL5EPx/vMlOCKdyEBsgDFao8\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 04 Aug 2024 03:22:46 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": \"OK\",\n    \"code\": 200,\n    \"success\": true,\n    \"message\": \"Recuperação de senha solicitada com sucesso!\",\n    \"data\": {\n        \"code\": \"0e40cbec24787e5f2c12047094fdb6e57ac88af9\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Reset password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"henryzanata@outlook.com\",\n    \"token\": \"c775fab2f47550b54ed93dcd15d4c6eae12d0e4e\",\n    \"password\": \"senha1122\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/unauth/reset-password",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"unauth",
+										"reset-password"
+									]
+								},
+								"description": "This route is used to reset the user's password using a password reset token.\n\n**Request Body Parameters (JSON):**\n\n- `token` (string): Password reset token sent to the user's email.\n- `email` (string): User's email address.\n- password (string): User's new password. Must be at least 8 characters long."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
